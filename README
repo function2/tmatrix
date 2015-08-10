@@ -1,0 +1,6 @@
+To compile you will need
+scons, libboost-dev, libgmp-dev
+
+To compile type
+$ scons
+In the same directory as this README.
