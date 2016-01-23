@@ -1,3 +1,9 @@
+tmatrix linear algebra library
+
+Author: Michael Seyfert michael@codesand.org
+see COPYING for the license
+
+
 To compile you will need
 scons, libboost-dev, libgmp-dev
 
