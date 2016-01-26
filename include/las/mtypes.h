@@ -126,8 +126,11 @@ template<> void Canonicalize<Float>(Float &c)
 template<class T>
 void Canonicalize(std::complex<T> &c)
 {
-	Canonicalize(c.real());
-	Canonicalize(c.imag());
+    // Hack to get real/imaginary part as a reference (since c++11).
+    T &r = reinterpret_cast<T(&)[2]>(c)[0];
+	Canonicalize(r);
+    T &i = reinterpret_cast<T(&)[2]>(c)[1];
+	Canonicalize(i);
 }
 
 // Canonicalize every element of a matrix.
@@ -140,14 +143,14 @@ void Canonicalize(boost::numeric::ublas::triangular_matrix<T,boost::numeric::ubl
 
 // === Rational Matrix types.
 typedef std::complex<bigq> q_type;
-typedef boost::numeric::ublas::matrix<q_type> mxq;
+typedef boost::numeric::ublas::matrix<q_type> mxq; // rational w/ imaginary matrix
 typedef boost::numeric::ublas::matrix<bigq> mxqr; // rational real matrix.
 typedef boost::numeric::ublas::triangular_matrix<q_type,boost::numeric::ublas::upper> mxqtu;
 // ===
 
 // === Floating point matrix types.
 typedef std::complex<Float> f_type;
-typedef boost::numeric::ublas::matrix<f_type> mxf;
+typedef boost::numeric::ublas::matrix<f_type> mxf; // float w/ imaginary matrix
 typedef boost::numeric::ublas::matrix<Float> mxfr; // float real matrix.
 typedef boost::numeric::ublas::triangular_matrix<f_type,boost::numeric::ublas::upper> mxftu;
 // ===
