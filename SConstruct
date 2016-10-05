@@ -16,20 +16,21 @@ OBJ_DIR = '%s/obj' % (BUILD_DIR)
 
 # Select compiler
 # CXX = 'g++' , CXX = 'clang++'
-env = Environment(CXX = 'eg++')
+env = Environment(CXX = 'clang++-3.9')
+#env = Environment(CXX = 'g++-6')
 
 # Put scons database in build directory.
 env.SConsignFile("%s/scons/scons-signatures" % BUILD_DIR)
 
 # Flags.
 include_flags = ' -I./include -I/usr/local/include '
-BUILD_FLAGS = '-O9 -Wall' + include_flags
+BUILD_FLAGS = '-O3 -Wall' + include_flags
 link_flags = '-s -L/usr/local/lib '
 GMPXX_FLAGS = R' -DMATRIX_GMPXX -DFLOAT_ZERO_EPS=\\\"1e-16\\\" -lgmpxx -lgmp'
 env.Append(LINKFLAGS = link_flags)
 
 # comment this out for older compilers.
-BUILD_FLAGS += ' -std=c++11'
+BUILD_FLAGS += ' -std=c++14'
 
 # File names.
 input_names = [
